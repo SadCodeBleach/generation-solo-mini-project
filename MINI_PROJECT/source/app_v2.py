@@ -1,5 +1,4 @@
-from app_funcs import clear_screen
-import os
+from app_funcs import *
 import sys
 import time
 
@@ -66,9 +65,7 @@ Please Select an Option: """))
                 
                 elif product_menu_option == 1:
                     clear_screen() 
-                    print("\n[PRODUCT ITEM LIST:]\n")                
-                    for item, price in product_items.items():
-                        print(item, price)
+                    print_products_dict(product_items)
                     time.sleep(1.5)
                 
                 elif product_menu_option == 2:
@@ -78,10 +75,7 @@ Please Select an Option: """))
                         new_product_price = float(input("Enter New Product Price: "))
                         new_item = {new_product_name: new_product_price}
                         product_items.update(new_item)
-                        print("\n")
-                        print("[PRODUCT ITEM LIST:]")
-                        for item, price in product_items.items():
-                            print(item, price)
+                        print_products_dict(product_items)
                         time.sleep(1.5)
                     except Exception:
                         print("""!Incorrect Item Name or Price!
@@ -89,10 +83,7 @@ Please Select an Option: """))
                 
                 elif product_menu_option == 3:
                     clear_screen()
-                    print("\n")
-                    print("[PRODUCT ITEM LIST:]")                
-                    for index, item in enumerate(product_items):
-                        print(index, item)
+                    print_products_dict(product_items)
                     print("\n")
                     
                     try:
@@ -103,9 +94,7 @@ Please Select an Option: """))
                         del product_items[current_product_item]
                         product_items.update(new_item)
                         clear_screen()
-                        print("[PRODUCT ITEM LIST:]")                
-                        for item, price in product_items.items():
-                            print(item, price)
+                        print_products_dict(product_items)
                         time.sleep(1.5)
                     except Exception:
                         clear_screen()
@@ -114,15 +103,13 @@ Please Select an Option: """))
                 
                 elif product_menu_option == 4:
                     clear_screen()
-                    print("[PRODUCT ITEM LIST:]")                
-                    for item, price in product_items.items():
-                        print(item, price)
+                    print_products_dict(product_items)
                     print("\n")
                     try:
                         current_product_item = str(input("Select Product to Delete: "))
                         del product_items[current_product_item]
-                        for item, price in product_items.items():
-                            print(item, price)
+                        print_products_dict(product_items)
+                        time.sleep(1.5)
                         print("\n")
                     except NameError:
                         clear_screen()
@@ -160,8 +147,7 @@ Please Select an Option: """))
                 
                 elif orders_menu_option == 1:
                     clear_screen()
-                    print("\n[ORDERS LIST:]\n")                                  
-                    print(orders_menu)
+                    enumerate_orders_dict(orders_menu)
                     time.sleep(1.5) 
                 
                 elif orders_menu_option == 2:
@@ -173,16 +159,15 @@ Please Select an Option: """))
                         status = "Preparing"
                         new_order = {"customer_name:": new_customer_name, "customer_address:": new_customer_address, "customer_phone:": new_customer_number, "status:": status}
                         orders_menu.append(new_order)
-                        for order in orders_menu:
-                            print("\n", order)
+                        clear_screen()
+                        enumerate_orders_dict(orders_menu)
                         time.sleep(1.5)
                     except Exception as e:
                         print(f"You have made a(n) {e} error.")
                 
                 elif orders_menu_option == 3:
                     clear_screen()
-                    for index, order in enumerate(orders_menu):
-                        print(index, order)
+                    enumerate_orders_dict(orders_menu)
                     try:
                         order_index = int(input("\nSelect Order Index: "))
                         if order_index == index:
@@ -248,7 +233,7 @@ Please Select an Update Option: """))
                                 status_update = "Delivered"
                             
                             orders_menu[index]["status:"] = status_update
-                        print("\n", orders_menu)
+                        enumerate_orders_dict(orders_menu)
                         time.sleep(1.5)
                     except Exception as e:
                         clear_screen()
@@ -305,14 +290,37 @@ Please Select an Option: """))
                 if courier_menu_option == 0:
                     clear_screen()
                     break
-                    
-                                   
-               
-                        
-                    
-                        
-                    
+            
+                elif courier_menu_option == 1:
+                    clear_screen()
+                    print_couriers_list()
+                    time.sleep(1.5)
                 
+                elif courier_menu_option == 2:
+                    clear_screen()
+                    try:
+                        new_courier = str(input("Enter New Courier Name: "))
+                        write_couriers_list(new_courier)
+                        print_couriers_list()
+                        time.sleep(1.5)
+                        
+                    except Exception:
+                        clear_screen()
+                        print("!This Is Not a Name!")
+                        
+                elif courier_menu_option == 3:
+                    clear_screen()
+                    enumerate_courier_file()
+                    try:
+                        index = int(input("Select Courier Index: "))
+                        
+                        
+                    except Exception:
+                        clear_screen()
+                        print("!Incorrect Index, Try Again!")
+                        time.sleep(1.5)
+                    
+                                
                             
                         
                         
@@ -322,9 +330,9 @@ Please Select an Option: """))
             clear_screen()
             print("!Invalid Index, Try Again!")
             time.sleep(1.5)            
-    except Exception:
+    except Exception as e:
         clear_screen()
-        print("!Incorrect Option, Try Again!")
+        print(f"Theres an {e} error")
         time.sleep(1.5) 
         
     

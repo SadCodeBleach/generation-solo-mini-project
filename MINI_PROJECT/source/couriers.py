@@ -1,4 +1,4 @@
-couriers = ["jack", "sue"]
+couriers = ["Jack", "Claire"]
 
 with open("couriers.txt", "w") as f:
     for courier in couriers:
