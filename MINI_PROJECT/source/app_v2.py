@@ -1,3 +1,7 @@
+from app_funcs import clear_screen
+import os
+import sys
+import time
 
 product_items = {
     "Americano": 3.00,
@@ -31,14 +35,16 @@ Welcome to our cafe!
 Please Select an Option: """)) 
         
         if main_menu_option == 0:
-            print("See you again soon!")
-            exit
-            break
+            clear_screen()
+            print("\nSee you again soon!\n")
+            sys.exit()
+            
         
 #-------------Product Menu-------------------------------------------------    
    
         elif main_menu_option == 1:
-            while True:    
+            clear_screen()
+            while True:                  
                 try:    
                     product_menu_option = int(input("""
 Product Menu Options:
@@ -50,18 +56,23 @@ Product Menu Options:
     4: Delete a Product
 
 Please Select an Option: """))
+                    
                 except Exception:
-                    print("!Incorrect Option, Try Again!")
+                    print("\n!Incorrect Option, Try Again!")
                     
                 if product_menu_option == 0:
+                    clear_screen()
                     break
                 
                 elif product_menu_option == 1:
-                    print("[PRODUCT ITEM LIST:]")                
+                    clear_screen() 
+                    print("\n[PRODUCT ITEM LIST:]\n")                
                     for item, price in product_items.items():
                         print(item, price)
+                    time.sleep(1.5)
                 
                 elif product_menu_option == 2:
+                    clear_screen()
                     try:
                         new_product_name = str(input("Enter New Product Item: "))
                         new_product_price = float(input("Enter New Product Price: "))
@@ -71,15 +82,17 @@ Please Select an Option: """))
                         print("[PRODUCT ITEM LIST:]")
                         for item, price in product_items.items():
                             print(item, price)
+                        time.sleep(1.5)
                     except Exception:
                         print("""!Incorrect Item Name or Price!
 !No Changes Have Been Made!""")
                 
                 elif product_menu_option == 3:
+                    clear_screen()
                     print("\n")
                     print("[PRODUCT ITEM LIST:]")                
-                    for item, price in product_items.items():
-                        print(item, price)
+                    for index, item in enumerate(product_items):
+                        print(index, item)
                     print("\n")
                     
                     try:
@@ -89,14 +102,18 @@ Please Select an Option: """))
                         new_item = {new_product_name: new_product_price}
                         del product_items[current_product_item]
                         product_items.update(new_item)
+                        clear_screen()
                         print("[PRODUCT ITEM LIST:]")                
                         for item, price in product_items.items():
                             print(item, price)
+                        time.sleep(1.5)
                     except Exception:
+                        clear_screen()
                         print("""!Incorrect Item Name or Price!
 !No Changes Have Been Made!""")
                 
                 elif product_menu_option == 4:
+                    clear_screen()
                     print("[PRODUCT ITEM LIST:]")                
                     for item, price in product_items.items():
                         print(item, price)
@@ -108,12 +125,19 @@ Please Select an Option: """))
                             print(item, price)
                         print("\n")
                     except NameError:
+                        clear_screen()
                         print("""!Item Does Not Exist!
 !No Changes Have Been Made!""")
+                
+                else:
+                    clear_screen()
+                    print("!Invalid Input, Try Again!")
+                    time.sleep(1.5)        
                         
 #----------------Orders Menu------------------------------------------- 
       
         elif main_menu_option == 2:
+            clear_screen()
             while True:    
                 try:    
                     orders_menu_option = int(input("""
@@ -131,13 +155,17 @@ Please Select an Option: """))
                     print("!Incorrect Option, Try Again!")
                            
                 if orders_menu_option == 0:
+                    clear_screen()
                     break
                 
                 elif orders_menu_option == 1:
-                    print("[ORDERS LIST:]")                
+                    clear_screen()
+                    print("\n[ORDERS LIST:]\n")                                  
                     print(orders_menu)
+                    time.sleep(1.5) 
                 
                 elif orders_menu_option == 2:
+                    clear_screen()
                     try:
                         new_customer_name = str(input("Enter New Customer Name: "))
                         new_customer_address = str(input("Enter New Customer Address: "))
@@ -146,17 +174,19 @@ Please Select an Option: """))
                         new_order = {"customer_name:": new_customer_name, "customer_address:": new_customer_address, "customer_phone:": new_customer_number, "status:": status}
                         orders_menu.append(new_order)
                         for order in orders_menu:
-                            print(order)
+                            print("\n", order)
+                        time.sleep(1.5)
                     except Exception as e:
                         print(f"You have made a(n) {e} error.")
                 
                 elif orders_menu_option == 3:
+                    clear_screen()
                     for index, order in enumerate(orders_menu):
                         print(index, order)
                     try:
-                        order_index = int(input("Select Order Index: "))
+                        order_index = int(input("\nSelect Order Index: "))
                         if order_index == index:
-                            order_index_2 = int(input("""Choose Update Status:
+                            order_index_2 = int(input("""\nChoose Update Status:
                                                       
 1: Preparing
 2: Out for Delivery
@@ -169,25 +199,26 @@ Please Select an Update Option: """))
                                 status_update = "Out for Delivery"
                             elif order_index_2 == 3:
                                 status_update = "Delivered"
-                            else:
-                                print("!Incorrect Choice!")
+                                
                             orders_menu[index]["status:"] = status_update
                             print(orders_menu)
-                        else:
-                            print("!Invalid Index!")
                     except Exception:
+                        clear_screen()
                         print("""!Index Does Not Exist!
 !No Changes Have Been Made!""")
+                        time.sleep(1.5)
                 
                 elif orders_menu_option == 4:
+                    clear_screen()
                     for index, order in enumerate(orders_menu):
                         print(index, order)
                     try:
-                        order_index = int(input("Select Order Index: "))
+                        order_index = int(input("\nSelect Order Index: "))
+                        print("\n")
                         if order_index == index:
                             for key, value in orders_menu[index].items():
                                 print(key, value)
-                            customer_name_update = str(input("Update customer name: "))
+                            customer_name_update = str(input("\nUpdate customer name: "))
                             if customer_name_update == "":
                                 print("Customer name has not been updated.")    
                             else:   
@@ -215,28 +246,67 @@ Please Select an Update Option: """))
                                 status_update = "Out for Delivery"
                             elif order_index_2 == 3:
                                 status_update = "Delivered"
-                            else:
-                                print("!Incorrect Choice!")
+                            
                             orders_menu[index]["status:"] = status_update
-                        print(orders_menu)
+                        print("\n", orders_menu)
+                        time.sleep(1.5)
                     except Exception as e:
+                        clear_screen()
                         print(f"Oh no! a(n) {e} has occured!")
+                        time.sleep(1.5)
                 
                 elif orders_menu_option == 5:
+                    clear_screen()
                     try:
                         for index, order in enumerate(orders_menu):
                             print(index, order)
-                        order_index = int(input("Select Order Index: "))
+                        order_index = int(input("\nSelect Order Index: "))
                         if order_index == index:
                             del orders_menu[index]
-                            print(orders_menu)      
+                            clear_screen()
+                            print("\n", orders_menu)
+                            time.sleep(1.5)
                         else:
-                            print("Incorrect index selection.")
-                    except Exception:
-                        print("""!Index Does Not Exist!
-!No Changes Have Been Made!""")
+                            clear_screen()
+                            print("!Index Does Not Exist!")
+                            time.sleep(1.5)      
+                            
+                    except Exception as e:
+                        clear_screen()
+                        print(f"Oh no! a(n) {e} has occured!")
+                        time.sleep(1.5)
+                        
+                else:
+                    clear_screen()
+                    print("!Invalid Input, Try Again!")
+                    time.sleep(1.5) 
                            
+ #---------Couriers Menu---------------------------------------------------
+ 
+        elif main_menu_option == 3:
+            clear_screen()
+            while True:
+                try:
+                    courier_menu_option = int(input("""
+Courier Menu Options:
+
+    0: Return to Main Menu
+    1: View Couriers List
+    2: Add New Courier
+    3: Update Existing Courier
+    4: Remove Courier
+
+Please Select an Option: """))
+                except Exception as e:
+                    clear_screen()
+                    print(f"Oh no! a(n) {e} has occured!")
+                    time.sleep(1.5)
                     
+                if courier_menu_option == 0:
+                    clear_screen()
+                    break
+                    
+                                   
                
                         
                     
@@ -248,8 +318,13 @@ Please Select an Update Option: """))
                         
                     
                 
-                
+        else:
+            clear_screen()
+            print("!Invalid Index, Try Again!")
+            time.sleep(1.5)            
     except Exception:
+        clear_screen()
         print("!Incorrect Option, Try Again!")
+        time.sleep(1.5) 
         
     
