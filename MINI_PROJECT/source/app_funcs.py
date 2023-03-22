@@ -10,7 +10,7 @@ def clear_screen():
 # Used to open product.json file and print to screen:
 def print_products_json():
     clear_screen()
-    print("[PRODUCT ITEM LIST:]")
+    print("[PRODUCT ITEM LIST]")
     try:    
         with open('products.json', 'r') as f:
             product_data = json.load(f)
@@ -21,7 +21,7 @@ def print_products_json():
 # Used to overwrite product.json file and print to screen:
 def write_products_json(product_items):
     clear_screen()
-    print("[PRODUCT ITEM LIST:]")
+    print("[PRODUCT ITEM LIST]")
     try:
         with open('products.json', 'w+') as f:
             json.dump(product_items, f, indent=4)
@@ -36,7 +36,9 @@ def print_orders_json():
     try:    
         with open('orders.json', 'r') as f:
             orders_data = json.load(f)
-            print(orders_data)
+        print("[ORDERS LIST]")
+        for index, order in enumerate(orders_data):
+            print(index, order)
     except FileNotFoundError as fnfe:
         print(f"Cannot find file: {fnfe}")
         
@@ -45,18 +47,40 @@ def write_orders_json(orders_menu):
     try:
         with open('orders.json', 'w') as f:
             json.dump(orders_menu, f, indent=4)
-            print(orders_menu)
+        print("[ORDERS LIST]")
+        for index, order in enumerate(orders_menu):
+            print(index, order)
     except FileNotFoundError as fnfe:
         print(f"Cannot find file: {fnfe}")
  
         
-def enum_orders_json(orders_menu):
+# def enum_orders_json(orders_menu):
+#     try:    
+#         with open('orders.json', 'r') as f:
+#             orders_menu = json.load(f)
+#         print("[ORDERS LIST]")
+#         for index, order in enumerate(orders_menu):
+#             print(index, order)
+#     except FileNotFoundError as fnfe:
+#         print(f"Cannot find file: {fnfe}")
+        
+#-------------------------------------------------------------------------------------
+
+def print_couriers_json():
     try:    
-        with open('orders.json', 'r') as f:
-            orders_menu = json.load(f)
-        print("[ORDERS LIST:]")
-        for index, order in enumerate(orders_menu):
-            print(index, order)
+        with open('couriers.json', 'r') as f:
+            couriers_data = json.load(f)
+        print("[COURIERS LIST]")
+        for index, courier in enumerate(couriers_data):
+            print(index, courier)
+    except FileNotFoundError as fnfe:
+        print(f"Cannot find file: {fnfe}")
+        
+
+def write_couriers_json(couriers_list):
+    try:
+        with open('couriers.json', 'w+') as f:
+            json.dump(couriers_list, f, indent=4)
     except FileNotFoundError as fnfe:
         print(f"Cannot find file: {fnfe}")
 

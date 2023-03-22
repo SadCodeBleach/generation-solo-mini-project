@@ -165,14 +165,11 @@ Please Select an Option: """))
                         new_customer_number = int(input("Enter New Customer Number: "))   
                         status = "Preparing"
                         
-                        for index, courier in enumerate(couriers_list):
-                            print(index, courier)
+                        clear_screen()
+                        print_couriers_json()
                         courier_choice = int(input("Choose Courier: "))
-                        if courier_choice == index:
-                            orders_menu[-1]["courier:"] = index
-                            
-                            
-                        new_order = {"customer_name:": new_customer_name, "customer_address:": new_customer_address, "customer_phone:": new_customer_number, "courier:": index, "status:": status}
+                               
+                        new_order = {"customer_name:": new_customer_name, "customer_address:": new_customer_address, "customer_phone:": new_customer_number, "courier:": courier_choice, "status:": status}
                         orders_menu.append(new_order)
                         clear_screen()
                         write_orders_json(orders_menu)
@@ -314,7 +311,7 @@ Please Select an Option: """))
             
                 elif courier_menu_option == 1:
                     clear_screen()
-                    print_couriers_list()
+                    print_couriers_json()
                     time.sleep(1.5)
                 
                 elif courier_menu_option == 2:
@@ -322,7 +319,7 @@ Please Select an Option: """))
                     try:
                         new_courier = str(input("Enter New Courier Name: "))
                         write_couriers_list(new_courier)
-                        print_couriers_list()
+                        print_couriers_json()
                         time.sleep(1.5)
                         
                     except Exception:

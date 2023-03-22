@@ -7,10 +7,10 @@
         "status:": "Preparing"
     },
     {
-        "customer_name:": "James M",
-        "customer_address:": "Cheshire, WX12 6TH",
-        "customer_phone:": 928123879238,
-        "courier:": 2,
+        "customer_name:": "Hello Kitty",
+        "customer_address:": "Island Adventure",
+        "customer_phone:": 12345678910,
+        "courier:": 1,
         "status:": "Preparing"
     }
 ]

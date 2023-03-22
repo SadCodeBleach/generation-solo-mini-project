@@ -35,7 +35,7 @@ def write_products_json(product_items):
 
     
 
-#--------------------------------------------------------------------------------
+# #--------------------------------------------------------------------------------
 orders_menu = [
     {
     "customer_name:": "John",
@@ -73,7 +73,7 @@ couriers_list = {
 def write_couriers_list():
     try:
         with open('couriers.json', 'w+') as f:
-            json.dump(couriers_list, f)
+            json.dump(couriers_list, f, indent=4)
     except FileNotFoundError as fnfe:
         print(f"Cannot find file: {fnfe}")
 
