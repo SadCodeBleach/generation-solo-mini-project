@@ -1,9 +1,0 @@
-Americano: 3.00
-Latte: 4.20
-Mocha: 4.50
-Iced Coffee: 4.25
-English Breakfast: 4.50
-Green Tea: 4.50
-Croissant: 2.20
-Muffin: 2.50
-Pastry: 3.50

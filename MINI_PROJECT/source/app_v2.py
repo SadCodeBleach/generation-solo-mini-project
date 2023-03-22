@@ -13,13 +13,24 @@ product_items = {
     "Muffin": 2.50,
     "Pastry": 3.50
 }
-orders_menu = [{
+
+orders_menu = [
+    {
     "customer_name:": "John",
     "customer_address:": "Unit 2, 12 Main Street, LONDON, WH1 2ER",
     "customer_phone:": "0789887334",
-    "status:": "Preparing"
-}]
+    "courier:": 2,
+    "status:": "Preparing",
+    }
+    ]
 
+couriers_list = {
+    "Jack": "07700127577",
+    "Claire": "07545739553",
+    "Maddie": "07265650318"
+}
+
+clear_screen()
 while True:
     try:
         main_menu_option = int(input(""" 
@@ -64,8 +75,7 @@ Please Select an Option: """))
                     break
                 
                 elif product_menu_option == 1:
-                    clear_screen() 
-                    print_products_dict(product_items)
+                    print_products_json() 
                     time.sleep(1.5)
                 
                 elif product_menu_option == 2:
@@ -75,15 +85,14 @@ Please Select an Option: """))
                         new_product_price = float(input("Enter New Product Price: "))
                         new_item = {new_product_name: new_product_price}
                         product_items.update(new_item)
-                        print_products_dict(product_items)
+                        write_products_json(product_items)
                         time.sleep(1.5)
                     except Exception:
                         print("""!Incorrect Item Name or Price!
 !No Changes Have Been Made!""")
                 
                 elif product_menu_option == 3:
-                    clear_screen()
-                    print_products_dict(product_items)
+                    print_products_json()
                     print("\n")
                     
                     try:
@@ -93,8 +102,7 @@ Please Select an Option: """))
                         new_item = {new_product_name: new_product_price}
                         del product_items[current_product_item]
                         product_items.update(new_item)
-                        clear_screen()
-                        print_products_dict(product_items)
+                        write_products_json(product_items)
                         time.sleep(1.5)
                     except Exception:
                         clear_screen()
@@ -102,13 +110,12 @@ Please Select an Option: """))
 !No Changes Have Been Made!""")
                 
                 elif product_menu_option == 4:
-                    clear_screen()
-                    print_products_dict(product_items)
+                    print_products_json()
                     print("\n")
                     try:
                         current_product_item = str(input("Select Product to Delete: "))
                         del product_items[current_product_item]
-                        print_products_dict(product_items)
+                        write_products_json(product_items)
                         time.sleep(1.5)
                         print("\n")
                     except NameError:
@@ -147,7 +154,7 @@ Please Select an Option: """))
                 
                 elif orders_menu_option == 1:
                     clear_screen()
-                    enumerate_orders_dict(orders_menu)
+                    print_orders_json()
                     time.sleep(1.5) 
                 
                 elif orders_menu_option == 2:
@@ -155,19 +162,30 @@ Please Select an Option: """))
                     try:
                         new_customer_name = str(input("Enter New Customer Name: "))
                         new_customer_address = str(input("Enter New Customer Address: "))
-                        new_customer_number = int(input("Enter New Customer Number: "))
+                        new_customer_number = int(input("Enter New Customer Number: "))   
                         status = "Preparing"
-                        new_order = {"customer_name:": new_customer_name, "customer_address:": new_customer_address, "customer_phone:": new_customer_number, "status:": status}
+                        
+                        for index, courier in enumerate(couriers_list):
+                            print(index, courier)
+                        courier_choice = int(input("Choose Courier: "))
+                        if courier_choice == index:
+                            orders_menu[-1]["courier:"] = index
+                            
+                            
+                        new_order = {"customer_name:": new_customer_name, "customer_address:": new_customer_address, "customer_phone:": new_customer_number, "courier:": index, "status:": status}
                         orders_menu.append(new_order)
                         clear_screen()
-                        enumerate_orders_dict(orders_menu)
+                        write_orders_json(orders_menu)
                         time.sleep(1.5)
+                        
                     except Exception as e:
                         print(f"You have made a(n) {e} error.")
                 
                 elif orders_menu_option == 3:
                     clear_screen()
-                    enumerate_orders_dict(orders_menu)
+                    print("[ORDERS LIST:]")
+                    for index, order in enumerate(orders_menu):
+                        print(index, order)
                     try:
                         order_index = int(input("\nSelect Order Index: "))
                         if order_index == index:
@@ -186,7 +204,8 @@ Please Select an Update Option: """))
                                 status_update = "Delivered"
                                 
                             orders_menu[index]["status:"] = status_update
-                            print(orders_menu)
+                            write_orders_json(orders_menu)
+                            
                     except Exception:
                         clear_screen()
                         print("""!Index Does Not Exist!
@@ -231,6 +250,8 @@ Please Select an Update Option: """))
                                 status_update = "Out for Delivery"
                             elif order_index_2 == 3:
                                 status_update = "Delivered"
+                            else:
+                                print("Delivery status has not been updated.")
                             
                             orders_menu[index]["status:"] = status_update
                         enumerate_orders_dict(orders_menu)
@@ -310,15 +331,6 @@ Please Select an Option: """))
                         
                 elif courier_menu_option == 3:
                     clear_screen()
-                    enumerate_courier_file()
-                    try:
-                        index = int(input("Select Courier Index: "))
-                        
-                        
-                    except Exception:
-                        clear_screen()
-                        print("!Incorrect Index, Try Again!")
-                        time.sleep(1.5)
                     
                                 
                             

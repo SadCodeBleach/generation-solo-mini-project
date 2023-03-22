@@ -1,10 +1,69 @@
 import os
+import json
+
 
 # Used to clear the screen:
 def clear_screen():
     os.system("cls")
 
-# Used to print tupled list from the product dictionary:    
+#-----------------Product List Funcs----------------------------------------------------    
+# Used to open product.json file and print to screen:
+def print_products_json():
+    clear_screen()
+    print("[PRODUCT ITEM LIST:]")
+    try:    
+        with open('products.json', 'r') as f:
+            product_data = json.load(f)
+            print(product_data)
+    except FileNotFoundError as fnfe:
+        print(f"Cannot find file: {fnfe}")
+
+# Used to overwrite product.json file and print to screen:
+def write_products_json(product_items):
+    clear_screen()
+    print("[PRODUCT ITEM LIST:]")
+    try:
+        with open('products.json', 'w+') as f:
+            json.dump(product_items, f, indent=4)
+            print(product_items)
+    except FileNotFoundError as fnfe:
+        print(f"Cannot find file: {fnfe}")
+        
+        
+ #-----------------Order List Funcs----------------------------------------------------         
+ # Used to open orders.json file and print to screen:   
+def print_orders_json():
+    try:    
+        with open('orders.json', 'r') as f:
+            orders_data = json.load(f)
+            print(orders_data)
+    except FileNotFoundError as fnfe:
+        print(f"Cannot find file: {fnfe}")
+        
+# Used to overwrite orders.json file and print to screen:
+def write_orders_json(orders_menu):
+    try:
+        with open('orders.json', 'w') as f:
+            json.dump(orders_menu, f, indent=4)
+            print(orders_menu)
+    except FileNotFoundError as fnfe:
+        print(f"Cannot find file: {fnfe}")
+ 
+        
+def enum_orders_json(orders_menu):
+    try:    
+        with open('orders.json', 'r') as f:
+            orders_menu = json.load(f)
+        print("[ORDERS LIST:]")
+        for index, order in enumerate(orders_menu):
+            print(index, order)
+    except FileNotFoundError as fnfe:
+        print(f"Cannot find file: {fnfe}")
+
+
+
+#-----------------------------------------------------------------------------------
+# # Used to print tupled list from the product dictionary:    
 def print_products_dict(product_items):
     print("\n")
     print("[PRODUCT ITEM LIST:]")
