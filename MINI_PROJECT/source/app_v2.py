@@ -166,7 +166,7 @@ Please Select an Option: """))
                         status = "Preparing"
                         
                         clear_screen()
-                        print_couriers_json()
+                        enum_couriers_json()
                         courier_choice = int(input("Choose Courier: "))
                                
                         new_order = {"customer_name:": new_customer_name, "customer_address:": new_customer_address, "customer_phone:": new_customer_number, "courier:": courier_choice, "status:": status}
@@ -251,7 +251,7 @@ Please Select an Update Option: """))
                                 print("Delivery status has not been updated.")
                             
                             orders_menu[index]["status:"] = status_update
-                        enumerate_orders_dict(orders_menu)
+                        enum_orders_json()
                         time.sleep(1.5)
                     except Exception as e:
                         clear_screen()
@@ -317,8 +317,12 @@ Please Select an Option: """))
                 elif courier_menu_option == 2:
                     clear_screen()
                     try:
-                        new_courier = str(input("Enter New Courier Name: "))
-                        write_couriers_list(new_courier)
+                        new_courier_name = str(input("Enter New Courier Name: "))
+                        new_courier_number = str(input("Enter New Courier Phone: "))
+                        new_courier = {new_courier_name: new_courier_number}
+                        couriers_list.update(new_courier)
+                        
+                        write_couriers_json(couriers_list)
                         print_couriers_json()
                         time.sleep(1.5)
                         
