@@ -1,10 +1,46 @@
-{
-    "Americano": 3.0,
-    "Iced Coffee": 4.25,
-    "English Breakfast": 4.5,
-    "Green Tea": 4.5,
-    "Croissant": 2.2,
-    "Muffin": 2.5,
-    "Pastry": 3.5,
-    "Chai Latte": 2.3
-}
+[
+    {
+        "name": "Americano",
+        "price": 3.0
+    },
+    {
+        "name": "Latte",
+        "price": 4.2
+    },
+    {
+        "name": "Mocha",
+        "price": 4.5
+    },
+    {
+        "name": "Iced Coffee",
+        "price": 4.25
+    },
+    {
+        "name": "English Breakfast",
+        "price": 4.0
+    },
+    {
+        "name": "Green Tea",
+        "price": 3.8
+    },
+    {
+        "name": "Croissant",
+        "price": 2.2
+    },
+    {
+        "name": "Muffin",
+        "price": 2.5
+    },
+    {
+        "name": "Pastry",
+        "price": 3.5
+    },
+    {
+        "name": "Cream Cheese Bagel",
+        "price": 2.25
+    },
+    {
+        "name": "Orange Soda",
+        "price": 0.95
+    }
+]

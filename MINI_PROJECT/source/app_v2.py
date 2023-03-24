@@ -180,9 +180,10 @@ Please Select an Option: """))
                 
                 elif orders_menu_option == 3:
                     clear_screen()
-                    print("[ORDERS LIST:]")
-                    for index, order in enumerate(orders_menu):
-                        print(index, order)
+                    # print("[ORDERS LIST:]")
+                    # for index, order in enumerate(orders_menu):
+                    #     print(index, order)
+                    enum_orders_json()
                     try:
                         order_index = int(input("\nSelect Order Index: "))
                         if order_index == index:
