@@ -82,23 +82,27 @@ Please Select an Option: """))
                     print("[PRODUCTS MENU]\n")
                     enumerate_list(product_dict)
                     time.sleep(1.5)
-                    
-                    get_product_index = int(input("Select Product Index: "))
-                    new_product_name = str(input("Enter New Product Item: "))
-                    new_product_price = float(input("Enter New Product Price: "))
-                    for product in product_dict[get_product_index]:
-                        if new_product_name == "":
-                            continue
-                        else:
-                            product_dict[get_product_index]["name"] = new_product_name
-                        if new_product_price == "":
-                            continue
-                        else:
-                            product_dict[get_product_index]["price"] = new_product_price
-                            
-                    print("[PRODUCTS MENU]\n")
-                    enumerate_list(product_dict)
-                    time.sleep(1.5)
+                    try:
+                        get_product_index = int(input("Select Product Index: "))
+                        new_product_name = str(input("Enter New Product Item: "))
+                        new_product_price = float(input("Enter New Product Price: "))
+                        for product in product_dict[get_product_index]:
+                            if new_product_name == "":
+                                continue
+                            else:
+                                product_dict[get_product_index]["name"] = new_product_name
+                            if new_product_price == "":
+                                continue
+                            else:
+                                product_dict[get_product_index]["price"] = new_product_price
+                                
+                        print("[PRODUCTS MENU]\n")
+                        enumerate_list(product_dict)
+                        time.sleep(1.5)
+                    except Exception:
+                            print("""!Incorrect Item Name or Price!
+!No Changes Have Been Made!""")
+                        
                 
                 elif product_menu_option == 4:
                     clear_screen()
@@ -139,13 +143,134 @@ Please Select an Option: """))
             
                 elif courier_menu_option == 1:
                     clear_screen()
-                    print("[COURIERS MENU]\n")
+                    print("[COURIERS LIST]\n")
                     enumerate_list(couriers_dict)
                     time.sleep(1.5)
+                
+                elif courier_menu_option == 2:
+                    clear_screen()
+                    try:
+                        new_courier_name = str(input("Enter New Courier Name: "))
+                        new_courier_phone = str(input("Enter New Courier Phone: "))
+                        new_courier = {"name": new_courier_name, "phone": new_courier_phone}
+                        couriers_dict.append(new_courier)
+                        save_list_to_json(couriers_dict, 'couriers.json')
+                        
+                        clear_screen()
+                        print("[COURIERS LIST]\n")
+                        enumerate_list(couriers_dict)
+                        time.sleep(1.5)
+                        
+                    except Exception:
+                        print("""!Incorrect Courier Name or Phone!
+!No Changes Have Been Made!""")
                     
+                elif courier_menu_option == 3:
+                    clear_screen()
+                    print("[COURIERS LIST]\n")
+                    enumerate_list(couriers_dict)
+                    time.sleep(1.5)
+                    try:
+                        get_courier_index = int(input("\nSelect Courier Index: "))
+                        new_courier_name = str(input("Enter New Courier Name: "))
+                        new_courier_phone = str(input("Enter New Courier Phone: "))
+                        for courier in couriers_dict[get_courier_index]:
+                            if new_courier_name == "":
+                                continue
+                            else:
+                                couriers_dict[get_courier_index]["name"] = new_courier_name
+                            if new_courier_phone == "":
+                                continue
+                            else:
+                                couriers_dict[get_courier_index]["phone"] = new_courier_phone
+                        
+                        clear_screen()        
+                        print("[COURIERS LIST]\n")
+                        enumerate_list(couriers_dict)
+                        time.sleep(1.5)
+                    except Exception:
+                            print("""!Incorrect Item Name or Price!
+!No Changes Have Been Made!""")    
                     
+                elif courier_menu_option == 4:
+                    clear_screen()
+                    print("[COURIERS LIST]\n")
+                    enumerate_list(couriers_dict)
+                    get_couriers_index = int(input("\nSelect Courier Index: "))
+                    couriers_dict.remove(couriers_dict[get_couriers_index])
+                    
+                    clear_screen()
+                    print("[COURIERS LIST]\n")
+                    enumerate_list(couriers_dict)
+                    time.sleep(1.5)    
     
+#----------------Orders Menu------------------------------------------- 
+      
+        elif main_menu_option == 3:
+            clear_screen()
+            while True:    
+                try:    
+                    orders_menu_option = int(input("""
+Orders Menu Options:
+
+    0: Return to Main Menu
+    1: Orders List
+    2: Add New Order Details
+    3: Update Existing Order Status
+    4: Update Existing Order Details
+    5: Delete Order
+
+Please Select an Option: """))
+                except Exception:
+                    print("!Incorrect Option, Try Again!")
+                           
+                if orders_menu_option == 0:
+                    clear_screen()
+                    break
+                
+                elif orders_menu_option == 1:
+                    clear_screen()
+                    print("[ORDERS LIST]\n")
+                    enumerate_list(orders_dict)
+                    time.sleep(1.5)  
+                
+                elif orders_menu_option == 2:
+                    clear_screen()
+                    try:
+                        new_customer_name = str(input("Enter New Customer Name: "))
+                        new_customer_address = str(input("Enter New Customer Address: "))
+                        new_customer_number = int(input("Enter New Customer Number: "))   
+                        status = "Preparing"
+                        items = ""
+                        courier = ""
+                        new_order = {"customer_name": new_customer_name,
+                                     "customer_address": new_customer_address,
+                                     "customer_phone": new_customer_number,
+                                     "courier": courier,
+                                     "status": status,
+                                     "items": items
+                                     }
+                        orders_dict.append(new_order)
+                        save_list_to_json(orders_dict, 'orders.json')
+                        
+                        enumerate_list(product_dict)
+                        for product in enumerate(product_dict):
+                            get_product_index = int(input("Select Products to Add: "))
+
+                            should_continue = str(input("Add More Items? (Y/N): "))
+                            if should_continue == "Y":
+                                orders_dict[-1]["items"] = ''.join(str(get_product_index))
+                                continue
+                            else:
+                                break
+                            
+                        clear_screen()
+                        enumerate_list(orders_dict)
+                        time.sleep(1.5)
                     
+                    
+                    except Exception as e:
+                        print(f"You have made a(n) {e} error.")                 
                     
                     
                     
