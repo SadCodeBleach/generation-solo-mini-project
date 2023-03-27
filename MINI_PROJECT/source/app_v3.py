@@ -95,6 +95,8 @@ Please Select an Option: """))
                                 continue
                             else:
                                 product_dict[get_product_index]["price"] = new_product_price
+                        
+                        save_list_to_json(product_dict, 'products.json')
                                 
                         print("[PRODUCTS MENU]\n")
                         enumerate_list(product_dict)
@@ -111,10 +113,17 @@ Please Select an Option: """))
                     get_product_index = int(input("\nSelect Product Index: "))
                     product_dict.remove(product_dict[get_product_index])
                     
+                    save_list_to_json(product_dict, 'products.json')
+                    
                     clear_screen()
                     print("[PRODUCTS MENU]\n")
                     enumerate_list(product_dict)
                     time.sleep(1.5)
+                
+                else:
+                    clear_screen()
+                    print("!Incorrect Menu Choice!")
+                    time.sleep(1)
 
 #---------Couriers Menu---------------------------------------------------
 
@@ -184,6 +193,8 @@ Please Select an Option: """))
                             else:
                                 couriers_dict[get_courier_index]["phone"] = new_courier_phone
                         
+                        save_list_to_json(couriers_dict, 'couriers.json')
+                        
                         clear_screen()        
                         print("[COURIERS LIST]\n")
                         enumerate_list(couriers_dict)
@@ -196,13 +207,20 @@ Please Select an Option: """))
                     clear_screen()
                     print("[COURIERS LIST]\n")
                     enumerate_list(couriers_dict)
-                    get_couriers_index = int(input("\nSelect Courier Index: "))
-                    couriers_dict.remove(couriers_dict[get_couriers_index])
+                    get_courier_index = int(input("\nSelect Courier Index: "))
+                    couriers_dict.remove(couriers_dict[get_courier_index])
+                    
+                    save_list_to_json(couriers_dict, 'couriers.json')
                     
                     clear_screen()
                     print("[COURIERS LIST]\n")
                     enumerate_list(couriers_dict)
-                    time.sleep(1.5)    
+                    time.sleep(1.5)
+                
+                else:
+                    clear_screen()
+                    print("!Incorrect Menu Choice!")
+                    time.sleep(1)    
     
 #----------------Orders Menu------------------------------------------- 
       
@@ -253,30 +271,142 @@ Please Select an Option: """))
                         orders_dict.append(new_order)
                         save_list_to_json(orders_dict, 'orders.json')
                         
+                        # Adding multiple items code below only adds 1 even after multiple inputs:
+                        clear_screen()
                         enumerate_list(product_dict)
                         for product in enumerate(product_dict):
-                            get_product_index = int(input("Select Products to Add: "))
+                            get_product_index = int(input("\nSelect Products to Add: "))
 
-                            should_continue = str(input("Add More Items? (Y/N): "))
+                            should_continue = str(input("\nAdd More Items? (Y/N): "))
                             if should_continue == "Y":
-                                orders_dict[-1]["items"] = ''.join(str(get_product_index))
+                                items = ','.join(str(get_product_index))
                                 continue
                             else:
                                 break
-                            
-                        clear_screen()
+                        
+                        orders_dict[-1]["items"] = items
+                        
+                        enumerate_list(couriers_dict)
+                        get_courier_index = int(input("Select Courier: "))
+                        orders_dict[-1]["courier"] = get_courier_index
+                        
+                        save_list_to_json(orders_dict, 'orders.json')
+                        
+                        print("[ORDERS LIST]\n")
                         enumerate_list(orders_dict)
                         time.sleep(1.5)
                     
+                    except Exception as e:
+                        print(f"!A(n) error has occured: {e}")
+                        
                     
+                elif orders_menu_option == 3:
+                    clear_screen()
+                    print("[ORDERS LIST]\n")
+                    enumerate_list(orders_dict)
+                    time.sleep(0.5) 
+                    
+                    try:
+                        get_order_index = int(input("\nSelect Order Index: "))
+                        
+                        enumerate_list(orders_status_list)
+                        get_status_index = int(input("\nSelect Status: "))
+                        
+                        orders_dict[get_order_index]["status"] = orders_status_list[get_status_index]
+                        
+                        save_list_to_json(orders_dict, 'orders.json')
+                        
+                        print("[ORDERS LIST]\n")
+                        enumerate_list(orders_dict)
+                        time.sleep(1.5)                     
+                        
                     except Exception as e:
                         print(f"You have made a(n) {e} error.")                 
                     
                     
+                elif orders_menu_option == 4:
+                    clear_screen()
+                    print("[ORDERS LIST]\n")
+                    enumerate_list(orders_dict)
+                    time.sleep(0.5)
                     
+                    try:
+                        get_order_index = int(input("\nSelect Order Index: "))
+                        new_customer_name = str(input("\nEnter New Customer Name: "))
+                        new_customer_address = str(input("\nEnter New Customer Address: "))
+                        new_customer_number = int(input("\nEnter New Customer Number: "))
+                        enumerate_list(couriers_dict)
+                        get_courier_index = int(input("\nSelect Courier: "))
+                        enumerate_list(orders_status_list)
+                        get_status_index = int(input("\nSelect Status: "))
+                        enumerate_list(product_dict)
+                        get_product_index = int(input("\nSelect Products to Add: "))
+                         
+                        for details in orders_dict[get_order_index]:
+                            if new_customer_name == "":
+                                continue
+                            else:
+                                orders_dict[get_order_index]["customer_name"] = new_customer_name
+                            if new_customer_address == "":
+                                continue
+                            else:
+                                orders_dict[get_order_index]["customer_address"] = new_customer_address
+                            if new_customer_number == "":
+                                continue
+                            else:
+                                orders_dict[get_order_index]["customer_phone"] = new_customer_number
+                            if get_courier_index == "":
+                                continue
+                            else:
+                                orders_dict[get_order_index]["courier"] = get_courier_index
+                            if get_status_index == "":
+                                continue
+                            else:
+                                orders_dict[get_order_index]["status"] = orders_status_list[get_status_index]
+                            if get_product_index == "":
+                                continue
+                            else:
+                                orders_dict[get_order_index]["items"] = get_product_index
+                        
+                        save_list_to_json(orders_dict, 'orders.json')
+                        clear_screen()
+                        print("[ORDERS LIST]\n")
+                        enumerate_list(orders_dict)
+                        time.sleep(1.5)
+                    
+                    except Exception as e:
+                        print(f"You have made a(n) {e} error.")
                 
+                elif orders_menu_option == 5:
+                    clear_screen()
+                    print("[ORDERS LIST]\n")
+                    enumerate_list(orders_dict)
+                    time.sleep(0.5)
+                    
+                    try:
+                        
+                        get_order_index = int(input("Select Order to Delete: "))
+                        orders_dict.remove(orders_dict[get_order_index])
+                        save_list_to_json(orders_dict, 'orders.json')
+                        
+                        clear_screen()
+                        print("[ORDERS LIST]\n")
+                        enumerate_list(orders_dict)
+                        time.sleep(1.5)
+                        
+                    except Exception:
+                       print("""!Incorrect Index!
+#!No Changes Have Been Made!""") 
+                
+                else:
+                    clear_screen()
+                    print("!Incorrect Menu Choice!")
+                    time.sleep(1)
     
-    
+        else:
+            clear_screen()
+            print("!Incorrect Menu Choice!")
+            time.sleep(1)
     
     
     

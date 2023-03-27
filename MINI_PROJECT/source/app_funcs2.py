@@ -13,7 +13,7 @@ def load_list_from_json(filename: str) -> List[Dict]:
             file_data = json.loads(f.read())
         return file_data
     except FileNotFoundError as fnfe:
-        print(f"Cannot fine file: {fnfe}")
+        print(f"Cannot find file: {fnfe}")
 
 # orders = load_list_from_json('products.json')
 # print(orders)
