@@ -1,6 +1,8 @@
 import json
 from typing import List,Dict
 import os
+import pymysql
+from dotenv import load_dotenv
 
 # Used to clear screen:
 def clear_screen():
@@ -25,7 +27,10 @@ def save_list_to_json(list_to_save, filename):
             json.dump(list_to_save, f, indent=4)
     except FileNotFoundError as fnfe:
         print(f"Cannot find file: {fnfe}")
-        
+ 
+# Generic function to display with index:       
 def enumerate_list(some_list):
     for index, key in enumerate(some_list):
         print(index, key)
+
+# 

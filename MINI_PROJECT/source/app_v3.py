@@ -1,5 +1,6 @@
 import sys
 import time
+from my_db_app import *
 from app_funcs2 import *
 
 product_dict = load_list_from_json('products.json')
