@@ -260,7 +260,7 @@ Please Select an Option: """))
                         new_customer_address = str(input("Enter New Customer Address: "))
                         new_customer_number = int(input("Enter New Customer Number: "))   
                         status = "Preparing"
-                        items = ""
+                        items = []
                         courier = ""
                         new_order = {"customer_name": new_customer_name,
                                      "customer_address": new_customer_address,
@@ -280,11 +280,12 @@ Please Select an Option: """))
 
                             should_continue = str(input("\nAdd More Items? (Y/N): "))
                             if should_continue == "Y":
-                                items = ','.join(str(get_product_index))
+                                items.append(get_product_index)
                                 continue
                             else:
                                 break
-                        
+                            
+                        items = ','.join(str(get_product_index))
                         orders_dict[-1]["items"] = items
                         
                         enumerate_list(couriers_dict)
@@ -298,7 +299,7 @@ Please Select an Option: """))
                         time.sleep(1.5)
                     
                     except Exception as e:
-                        print(f"!A(n) error has occured: {e}")
+                        print(f"{e}")
                         
                     
                 elif orders_menu_option == 3:
