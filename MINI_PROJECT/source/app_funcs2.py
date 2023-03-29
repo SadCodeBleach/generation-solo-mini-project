@@ -1,8 +1,7 @@
 import json
 from typing import List,Dict
 import os
-import pymysql
-from dotenv import load_dotenv
+
 
 # Used to clear screen:
 def clear_screen():

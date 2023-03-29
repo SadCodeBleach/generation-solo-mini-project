@@ -37,7 +37,7 @@ try:
             connection.commit()
             
         def insert_into_product_db(product_name, product_price):
-            sql = "INSERT INTO couriers (product_name, product_price) VALUES (%s,%s)"
+            sql = "INSERT INTO products (product_name, product_price) VALUES (%s,%s)"
             cursor.execute(sql, ({product_name}, {product_price}))
             connection.commit()
 
@@ -54,13 +54,12 @@ try:
         def select_from_products_db():
             cursor.execute("SELECT product_name, product_price FROM products")
             rows = cursor.fetchall()
-            print('Displaying all records...')
             print(rows)
             
             
             
 
-        #print('Displaying all records...')
+        print('Displaying all records...')
         # TODO Add code here to print out all the records
         
 
