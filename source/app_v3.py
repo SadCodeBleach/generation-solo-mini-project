@@ -60,7 +60,7 @@ Please Select an Option: """))
                 elif product_menu_option == 2:
                     clear_screen()
                     try:
-                        new_product_name = str(input("Enter New Product Item: "))
+                        new_product_name = input("Enter New Product Item: ")
                         new_product_price = float(input("Enter New Product Price: "))
                         insert_into_product_db(new_product_name, new_product_price)
                         select_from_products_db()
