@@ -2,6 +2,7 @@ import sys
 import time
 from db_funcs import *
 from app_funcs2 import *
+from input_funcs import *
 
 product_dict = load_list_from_json('products.json')
 orders_dict = load_list_from_json('orders.json')
@@ -10,7 +11,7 @@ couriers_dict = load_list_from_json('couriers.json')
 orders_status_list = ["Preparing", "Out for Delivery", "Delivered"]
 
 clear_screen()
-while True:
+while True: # Display Main Menu Options
     try:
         main_menu_option = int(input(""" 
 Welcome to our cafe! 
@@ -23,14 +24,14 @@ Welcome to our cafe!
                                  
 Please Select an Option: """)) 
         
-        if main_menu_option == 0:
+        if main_menu_option == 0:   # Exits App
             clear_screen()
             print("\nSee you again soon!\n")
             sys.exit()
 
 #-------------Product Menu-------------------------------------------------    
    
-        elif main_menu_option == 1:
+        elif main_menu_option == 1: # Shows Product Menu Options
             clear_screen()
             while True:                  
                 try:    
@@ -48,51 +49,34 @@ Please Select an Option: """))
                 except Exception:
                     print("\nIncorrect Option, Try Again!")
                     
-                if product_menu_option == 0:
+                if product_menu_option == 0: # Back to Main Menu
                     clear_screen()
                     break
                 
-                elif product_menu_option == 1:
+                elif product_menu_option == 1: # Displays Product Items
                     clear_screen()
                     select_from_products_db()
                     time.sleep(1.5)
                 
-                elif product_menu_option == 2:
+                elif product_menu_option == 2: # Adds New Products
                     clear_screen()
+                    
                     try:
-                        new_product_name = input("Enter New Product Item: ")
-                        new_product_price = float(input("Enter New Product Price: "))
-                        insert_into_product_db(new_product_name, new_product_price)
+                        insert_into_product_db(get_name_input("Enter New Product Item: "), get_price_input("Enter New Product Price: "))
                         select_from_products_db()
                         time.sleep(1.5)    
                     except Exception:
                         print("""!Incorrect Item Name or Price!
 !No Changes Have Been Made!""")
                 
-                elif product_menu_option == 3:
+                elif product_menu_option == 3: # Update Existing Products
                     clear_screen()
                     select_from_products_db()
                     time.sleep(1.5)
+                    
                     try:
-                        get_product_id = int(input("Select Product ID: "))
-                        new_product_name = str(input("Enter New Product Item: "))
-                        new_product_price = float(input("Enter New Product Price: "))
-                        # for product in product_dict[get_product_id]:
-                        #     if new_product_name == "":
-                        #         continue
-                        #     else:
-                        #         product_dict[get_product_id]["name"] = new_product_name
-                        #     if new_product_price == "":
-                        #         continue
-                        #     else:
-                        #         product_dict[get_product_id]["price"] = new_product_price
-                        
-                        update_product_db(get_product_id, new_product_name, new_product_price)
-                        #save_list_to_json(product_dict, 'products.json')
-                         
+                        update_product_db(get_id_input("\nSelect Product ID: "), get_name_input("Enter New Product Item: "), get_price_input("Enter New Product Price: "))
                         select_from_products_db()        
-                        # print("[PRODUCTS MENU]\n")
-                        # enumerate_list(product_dict)
                         time.sleep(1.5)
                     except Exception as e:
                             print(f"""!Incorrect Item Name or Price!
@@ -100,31 +84,23 @@ Please Select an Option: """))
 Ex: {e}""")
                         
                 
-                elif product_menu_option == 4:
+                elif product_menu_option == 4: # Deletes Products
                     clear_screen()
                     select_from_products_db()
-                    # print("[PRODUCTS MENU]\n")
-                    # enumerate_list(product_dict)
-                    get_product_id = int(input("\nSelect Product ID: "))
-                    #product_dict.remove(product_dict[get_product_index])
-                    remove_from_product_db(get_product_id)
-                    
-                    #save_list_to_json(product_dict, 'products.json')
+                    remove_from_product_db(get_id_input("\nSelect Product ID: "))
                     
                     clear_screen()
                     select_from_products_db()
-                    # print("[PRODUCTS MENU]\n")
-                    # enumerate_list(product_dict)
                     time.sleep(1.5)
                 
-                else:
+                else: # Error Handling to Catch Invalid Menu Index
                     clear_screen()
                     print("!Incorrect Menu Choice!")
                     time.sleep(1)
 
 #---------Couriers Menu---------------------------------------------------
 
-        elif main_menu_option == 2:
+        elif main_menu_option == 2: # Display Courier Menu Options
             clear_screen()
             while True:
                 try:
@@ -143,93 +119,58 @@ Please Select an Option: """))
                     print(f"Oh no! a(n) {e} has occured!")
                     time.sleep(1.5)
                 
-                if courier_menu_option == 0:
+                if courier_menu_option == 0: # Back to Main Menu
                     clear_screen()
                     break
             
-                elif courier_menu_option == 1:
+                elif courier_menu_option == 1: # Displays Couriers
                     clear_screen()
                     select_from_couriers_db()
-                    # print("[COURIERS LIST]\n")
-                    # enumerate_list(couriers_dict)
                     time.sleep(1.5)
                 
-                elif courier_menu_option == 2:
+                elif courier_menu_option == 2: # Adds New Couriers
                     clear_screen()
+                    
                     try:
-                        new_courier_name = str(input("Enter New Courier Name: "))
-                        new_courier_phone = str(input("Enter New Courier Phone: "))
-                        # new_courier = {"name": new_courier_name, "phone": new_courier_phone}
-                        # couriers_dict.append(new_courier)
-                        # save_list_to_json(couriers_dict, 'couriers.json')
-                        insert_into_courier_db(new_courier_name, new_courier_phone)
-                        
+                        insert_into_courier_db(get_name_input("Enter New Courier Name: "), get_phone_input("Enter New Courier Phone: "))
                         clear_screen()
                         select_from_couriers_db()
-                        # print("[COURIERS LIST]\n")
-                        # enumerate_list(couriers_dict)
-                        time.sleep(1.5)
-                        
+                        time.sleep(1.5)   
                     except Exception:
                         print("""!Incorrect Courier Name or Phone!
 !No Changes Have Been Made!""")
                     
-                elif courier_menu_option == 3:
+                elif courier_menu_option == 3: # Updates Existing Couriers
                     clear_screen()
                     select_from_couriers_db()
-                    # print("[COURIERS LIST]\n")
-                    # enumerate_list(couriers_dict)
                     time.sleep(1.5)
+                    
                     try:
-                        get_courier_id = int(input("\nSelect Courier ID: "))
-                        new_courier_name = str(input("Enter New Courier Name: "))
-                        new_courier_phone = str(input("Enter New Courier Phone: "))
-                        # for courier in couriers_dict[get_courier_index]:
-                        #     if new_courier_name == "":
-                        #         continue
-                        #     else:
-                        #         couriers_dict[get_courier_index]["name"] = new_courier_name
-                        #     if new_courier_phone == "":
-                        #         continue
-                        #     else:
-                        #         couriers_dict[get_courier_index]["phone"] = new_courier_phone
-                        update_courier_db(get_courier_id, new_courier_name, new_courier_phone)
-                        # save_list_to_json(couriers_dict, 'couriers.json')
-                        
+                        update_courier_db(get_id_input("\nSelect Courier ID: "), get_name_input("Enter New Courier Name: "), get_phone_input("Enter New Courier Phone: "))
                         clear_screen()
-                        select_from_couriers_db()        
-                        # print("[COURIERS LIST]\n")
-                        # enumerate_list(couriers_dict)
-                        time.sleep(1.5)
+                        select_from_couriers_db()
+                        time.sleep(1.5)                      
                     except Exception as e:
                             print(f"""!Incorrect Item Name or Price!
 !No Changes Have Been Made! {e}""")    
                     
-                elif courier_menu_option == 4:
+                elif courier_menu_option == 4: # Deletes a Courier
                     clear_screen()
                     select_from_couriers_db()
-                    # print("[COURIERS LIST]\n")
-                    # enumerate_list(couriers_dict)
-                    get_courier_id = int(input("\nSelect Courier ID: "))
-                    remove_from_couriers_db(get_courier_id)
-                    #couriers_dict.remove(couriers_dict[get_courier_index])
-                    
-                    #save_list_to_json(couriers_dict, 'couriers.json')
+                    remove_from_couriers_db(get_id_input("\nSelect Courier ID: "))
                     
                     clear_screen()
                     select_from_couriers_db()
-                    # print("[COURIERS LIST]\n")
-                    # enumerate_list(couriers_dict)
                     time.sleep(1.5)
-                
-                else:
+            
+                else: # Error Handling to Catch Invalid Menu Index
                     clear_screen()
                     print("!Incorrect Menu Choice!")
                     time.sleep(1)    
     
 #----------------Orders Menu------------------------------------------- 
       
-        elif main_menu_option == 3:
+        elif main_menu_option == 3: # Displays Orders Menu Options
             clear_screen()
             while True:    
                 try:    
@@ -247,17 +188,17 @@ Please Select an Option: """))
                 except Exception:
                     print("!Incorrect Option, Try Again!")
                            
-                if orders_menu_option == 0:
+                if orders_menu_option == 0: # Back to Main Menu
                     clear_screen()
                     break
                 
-                elif orders_menu_option == 1:
+                elif orders_menu_option == 1: # Displays Current Orders
                     clear_screen()
                     print("[ORDERS LIST]\n")
                     enumerate_list(orders_dict)
                     time.sleep(1.5)  
                 
-                elif orders_menu_option == 2:
+                elif orders_menu_option == 2: # Adds New Order
                     clear_screen()
                     try:
                         new_customer_name = str(input("Enter New Customer Name: "))
@@ -412,15 +353,6 @@ Please Select an Option: """))
             clear_screen()
             print("!Incorrect Menu Choice!")
             time.sleep(1)
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     except Exception as e:
