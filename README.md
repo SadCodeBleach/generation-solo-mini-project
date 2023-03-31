@@ -1,4 +1,5 @@
 # Sadat-Awuma_Mini-Project
+Test line added for git kata 12
 
 Simple overview of use/purpose.
 
