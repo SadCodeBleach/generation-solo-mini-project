@@ -196,8 +196,6 @@ Please Select an Option: """))
                 elif orders_menu_option == 1: # Displays Current Orders
                     clear_screen()
                     select_from_orders_db()
-                    # print("[ORDERS LIST]\n")
-                    # enumerate_list(orders_dict)
                     time.sleep(1.5)  
                 
                 elif orders_menu_option == 2: # Adds New Order
@@ -228,7 +226,7 @@ Please Select an Option: """))
                         print(f"!A(n) error has occured: {e}")
                         
                     
-                elif orders_menu_option == 3:
+                elif orders_menu_option == 3: # Update Order Status
                     clear_screen()
                     select_from_orders_db()
                     time.sleep(0.5) 
@@ -245,59 +243,52 @@ Please Select an Option: """))
                         print(f"You have made a(n) {e} error.")                 
                     
                     
-                elif orders_menu_option == 4:
+                elif orders_menu_option == 4: # Update Order Details
                     clear_screen()
                     select_from_orders_db()
                     time.sleep(0.5)
                     
                     try:
-                        get_order_index = int(input("\nSelect Order Index: "))
-                        new_customer_name = str(input("\nEnter New Customer Name: "))
-                        new_customer_address = str(input("\nEnter New Customer Address: "))
-                        new_customer_number = int(input("\nEnter New Customer Number: "))
-                        enumerate_list(couriers_dict)
-                        get_courier_index = int(input("\nSelect Courier: "))
-                        enumerate_list(orders_status_list)
-                        get_status_index = int(input("\nSelect Status: "))
-                        enumerate_list(product_dict)
-                        get_product_index = int(input("\nSelect Products to Add: "))
-                         
-                        for details in orders_dict[get_order_index]:
-                            if new_customer_name == "":
-                                continue
-                            else:
-                                orders_dict[get_order_index]["customer_name"] = new_customer_name
-                            if new_customer_address == "":
-                                continue
-                            else:
-                                orders_dict[get_order_index]["customer_address"] = new_customer_address
-                            if new_customer_number == "":
-                                continue
-                            else:
-                                orders_dict[get_order_index]["customer_phone"] = new_customer_number
-                            if get_courier_index == "":
-                                continue
-                            else:
-                                orders_dict[get_order_index]["courier"] = get_courier_index
-                            if get_status_index == "":
-                                continue
-                            else:
-                                orders_dict[get_order_index]["status"] = orders_status_list[get_status_index]
-                            if get_product_index == "":
-                                continue
-                            else:
-                                orders_dict[get_order_index]["items"] = get_product_index
+                        get_order_id = int(input("\nSelect Order Index: "))
+                        new_customer_name = str(input("Enter New Customer Name: "))
+                        new_customer_address = str(input("Enter New Customer Address: "))
+                        new_customer_phone = str(input("Enter New Customer Number: ")) 
+                        select_from_couriers_db()
+                        new_courier_id = int(input("Select Courier: "))
+                        select_from_products_db()
+                        new_product_item = int(input("\nSelect Product to Add: "))
+    
+                        if new_customer_name == "":
+                            continue
+                        else:
+                            customer_name = new_customer_name
+                        if new_customer_address == "":
+                            continue
+                        else:
+                            customer_address = new_customer_address
+                        if new_customer_phone == "":
+                            continue
+                        else:
+                            customer_phone = new_customer_phone
+                        if new_courier_id == "":
+                            continue
+                        else:
+                            courier_id = new_courier_id
+                        if new_product_item == "":
+                            continue
+                        else:
+                            product_item = new_product_item
                         
-                        save_list_to_json(orders_dict, 'orders.json')
+                        update_orders_db(customer_name, customer_address, customer_phone, courier_id, product_item, get_order_id)
+                        
                         clear_screen()
-                        print("[ORDERS LIST]\n")
-                        enumerate_list(orders_dict)
+                        select_from_orders_db()
                         time.sleep(1.5)
                     
                     except Exception as e:
                         print(f"You have made a(n) {e} error.")
                 
-                elif orders_menu_option == 5:
+                elif orders_menu_option == 5: # Delete an Order
                     clear_screen()
                     select_from_orders_db()
                     time.sleep(0.5)

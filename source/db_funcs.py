@@ -112,8 +112,8 @@ def update_order_status_db(get_order_id: int, get_status_id: int):
     except Exception as e:
         print(f'Failed to open connection: {e}')
         
-
-def update_orders_db(get_order_id: int, new_customer_name: str, new_customer_address, new_customer_phone: str, courier_id: int, product_id: int):
+        
+def update_orders_db(new_customer_name: str, new_customer_address: str, new_customer_phone, new_courier_id, new_product_id, get_order_id: int):
     try:
         with pymysql.connect(
             host = host_name,
@@ -122,8 +122,8 @@ def update_orders_db(get_order_id: int, new_customer_name: str, new_customer_add
             password = user_password    
         ) as connection:
             cursor = connection.cursor()
-            sql = "UPDATE orders SET customer_name = %s, customer_address = %s, customer_phone = %s, courier_id = %s, status_id = %s, product_id = %s WHERE order_id = %s"
-            cursor.execute(sql, ({new_customer_name}, {new_customer_address}, {new_customer_phone}, {courier_id}, {product_id}, {get_order_id}))
+            sql = "UPDATE orders SET customer_name = %s, customer_address = %s, customer_phone = %s, courier_id = %s, product_id = %s WHERE order_id = %s"
+            cursor.execute(sql, ({new_customer_name}, {new_customer_address}, {new_customer_phone}, {new_courier_id}, {new_product_id}, {get_order_id}))
             connection.commit()
             cursor.close()
     except Exception as e:
