@@ -4,12 +4,6 @@ from db_funcs import *
 from app_funcs2 import *
 from input_funcs import *
 
-product_dict = load_list_from_json('products.json')
-orders_dict = load_list_from_json('orders.json')
-couriers_dict = load_list_from_json('couriers.json')
-
-orders_status_list = ["Preparing", "Out for Delivery", "Delivered"]
-
 clear_screen()
 while True: # Display Main Menu Options
     try:
@@ -208,6 +202,8 @@ Please Select an Option: """))
                         select_from_couriers_db()
                         courier_id = int(input("Select Courier: "))
                         select_from_products_db()
+                        
+                        # Issue where multiple product inputs overwrites previous rather than adds to
                         while True:
                             product_item = int(input("\nSelect Product to Add: "))
                             should_continue = str(input("\nAdd More Items? (y/n): "))
@@ -259,22 +255,27 @@ Please Select an Option: """))
                         new_product_item = int(input("\nSelect Product to Add: "))
     
                         if new_customer_name == "":
+                            print('Entry empty, no updates made.')
                             continue
                         else:
                             customer_name = new_customer_name
                         if new_customer_address == "":
+                            print('Entry empty, no updates made.')
                             continue
                         else:
                             customer_address = new_customer_address
                         if new_customer_phone == "":
+                            print('Entry empty, no updates made.')
                             continue
                         else:
                             customer_phone = new_customer_phone
                         if new_courier_id == "":
+                            print('Entry empty, no updates made.')
                             continue
                         else:
                             courier_id = new_courier_id
                         if new_product_item == "":
+                            print('Entry empty, no updates made.')
                             continue
                         else:
                             product_item = new_product_item

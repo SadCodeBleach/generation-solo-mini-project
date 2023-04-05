@@ -1,37 +1,37 @@
 # Sadat-Awuma_Mini-Project
 
-Simple overview of use/purpose.
+This project is based on creating a realistic small appliction that would be used by a coffee shop.
 
 ## Description
 
-An in-depth paragraph about your project and overview of use.
+Furthermore, contained within the app there will be four seperate menus: Main Menu, Product Menu, Courier Menu, Orders Menu. Each menu excluding the main menu will have options to list, add, update and remove certain artefacts from the app (products, couiers, customer details.). Additionally all information has been uploaded and retained within a database.
 
 ## Getting Started
 
 ### Dependencies
 
-* Describe any prerequisites, libraries, OS version, etc., needed before installing program.
-* ex. Windows 10
+- Created on a Windows 10 system.
+- You must create an .env with these specifics:
+
+mysql_host=localhost
+mysql_user=root
+mysql_pass=password
+mysql_db=mini_project
 
 ### Installing
 
-* How/where to download your program
-* Any modifications needed to be made to files/folders
+* I will implement a sh.bash script that will set up the Docker container required to run the database.
 
 ### Executing program
 
-* How to run the program
-* Step-by-step bullets
-```
-code blocks for commands
-```
+* Path to navigate = 'sadat-awuma-mini-project\source\
+* To execte = 'py app_v3.py'
+
 
 ## Help
 
-Any advise for common problems or issues.
-```
-command to run if program contains helper info
-```
+* Issue in orders menu from line 207 regarding saving multiple products to an  order,  overwrites insteads of adds.
+* Orders database table is not normalised for the sake of function simpicity.
 
 ## Authors
 
@@ -42,16 +42,15 @@ sadateawuma@gmail.com
 
 ## Version History
 
-* 0.2
+* App_v3
     * Various bug fixes and optimizations
     * See [commit change]() or See [release history]()
-* 0.1
+* App_v2
+    * Various bug fixes and optimizations 
+    * See [commit change]() or See [release history]()
+* App_v1
     * Initial Release
-
-## License
-
-This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
 
 ## Acknowledgments
 
-Inspiration, code snippets, etc.
+- DELON9 Instructors

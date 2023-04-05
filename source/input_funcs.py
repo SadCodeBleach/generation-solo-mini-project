@@ -3,14 +3,16 @@ def get_id_input(input_text):
         try:
             id_option = int(input(input_text))
             if id_option == "":
-                print('No index selected.')
+                print('No id selected.')
                 break
             else:
                 return id_option
         except:
-            print('This is not an index!')
+            print('This is not an id!')
             break
 
+# if __name__ == '__main__':
+#     menu_option = get_id_input('Insert something: ')
 
 def get_name_input(input_text):
     while True:
