@@ -1,10 +1,12 @@
 # Sadat-Awuma_Mini-Project
 
+
 This project is based on creating a realistic small appliction that would be used by a coffee shop.
 
 ## Description
 
 Furthermore, contained within the app there will be four seperate menus: Main Menu, Product Menu, Courier Menu, Orders Menu. Each menu excluding the main menu will have options to list, add, update and remove certain artefacts from the app (products, couiers, customer details.). Additionally all information has been uploaded and retained within a database.
+
 
 ## Getting Started
 
@@ -33,6 +35,7 @@ mysql_db=mini_project
 * Issue in orders menu from line 207 regarding saving multiple products to an  order,  overwrites insteads of adds.
 * Orders database table is not normalised for the sake of function simpicity.
 
+
 ## Authors
 
 Contributors names and contact info
@@ -41,6 +44,7 @@ Sadat Awuma
 sadateawuma@gmail.com
 
 ## Version History
+
 
 * App_v3
     * Various bug fixes and optimizations
